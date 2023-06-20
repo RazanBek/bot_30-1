@@ -4,7 +4,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from config import bot, dp, ADMINS
 
 
-async def command_start(message: types.Message):
+async def command_mem(message: types.Message):
     photos = [
         'media/мем.jpg',
         'media/мем1.jpg',
@@ -36,12 +36,11 @@ async def quiz_1(message: types.message) -> None:
 
 
 async def pin(message: types.Message):
-    if message.from_user.id in ADMINS and message.reply_to_message:
+    if message.reply_to_message:
         await bot.pin_chat_message(message.chat.id, message.message_id)
 
 
 def register_handlers_commands(dp: Dispatcher):
-    dp.register_message_handler(command_start, commands=['start'])
+    dp.register_message_handler(command_mem, commands=['mem'])
     dp.register_message_handler(quiz_1, commands=['quiz'])
-    dp.register_message_handler(command_start, commands=['start'])
     dp.register_message_handler(pin, commands=['pin'], commands_prefix='!/')
